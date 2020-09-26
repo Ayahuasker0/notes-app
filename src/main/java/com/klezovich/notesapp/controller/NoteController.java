@@ -1,6 +1,8 @@
 package com.klezovich.notesapp.controller;
 
+import com.klezovich.notesapp.domain.NoteService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class NoteController {
 
-    //private final NoteService noteService;
+    private final NoteService noteService;
+
+    @Autowired
+    public NoteController(NoteService noteService) {
+        this.noteService = noteService;
+    }
 
     // Create a note
     @PostMapping("/note/create")
@@ -21,7 +28,7 @@ public class NoteController {
         log.info("Note name is:" + name);
         log.info("Note text is:" + text);
 
-        //noteService.saveNote(name,text);
+        noteService.createNote(name,text);
 
         return "note created";
     }
