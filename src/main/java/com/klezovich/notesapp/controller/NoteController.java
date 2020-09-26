@@ -25,6 +25,7 @@ public class NoteController {
         @RequestParam(name = "note_text") String text
         ) {
 
+        log.info("Presentation layer: Received request to create new note");
         log.info("Note name is:" + name);
         log.info("Note text is:" + text);
 
